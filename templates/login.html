@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Result</title>
+</head>
+<body>
+<div>
+    <h1 align="center">Search Result</h1>
+</div>
+<div>
+<!-- 0:image_ID, 1:imagename, 2:username, 3:hashtag1 -->
+    {% if images[0][0] =='0' %}
+      <img src="../../../../upload_files/project/thumbnail/img_not_available.png" height="100" width="100"/>
+     <p>Sorry, no image found.</p>
+    {% else %}
+    {% for image in images %}
+        <a href="view_image?id={{ image[0] }}">
+             <img src="../../../../upload_files/project/thumbnail/{{ image[1] }}" alt="{{ image[1] }}" height="100" width="100"/></a>
+        #{{ image[3] }}&nbsp;&nbsp;&nbsp;&nbsp;
+        {% if user !=  image[2]  %}
+        <p><a href="/api/add_friend?user={{image[2]}}">Add {{image[2]}} as my friend</a></p>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>
+   <p><a href="/api/homepage">Back to my homepage</a></p>
+
+</body>
+</html>

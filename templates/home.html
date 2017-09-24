@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Homepage</title>
+<style>
+#rightDiv{
+float:right;
+margin:0px;
+}
+</style>
+</head>
+
+<body>
+<div id="rightDiv">
+    <a href="/api/view_profile">View Profile</a>
+    &nbsp;&nbsp;<a href="/api/logout">Log Out</a>
+</div>
+<div>
+    <h1 align="center">{{user}}'s home</h1>
+</div>
+<div align="right">
+    <p>Search related items:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <form action = '/api/search' method='POST'>
+    <input type ='text' name='search_item' id='search_item' placeholder='search keyword'>
+    <input type='submit' value='Search'>
+    </form>
+</div>
+<div>
+    {% if images[0][0] =='0' %}
+      <img src="../../../../upload_files/project/thumbnail/img_not_available.png" height="200" width="200"/>
+     <p>Waiting for an image....</p>
+    {% else %}
+     <p>View Collection:</p>
+    {% for image in images %}
+        <a href="view_image?id={{ image[0] }}">
+             <img src="../../../../upload_files/project/thumbnail/{{ image[1] }}" alt="{{ image[1] }}" height="200" width="200"/></a>
+         #{{ image[2] }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {% endfor %}
+    {% endif %}
+</div>
+<div>
+   <p><a href="/image.html">Click to add new image</a></p>
+</div>
+<br><br>
+<div>
+    <!-- friend_list -->
+<p>Your friends:</p>
+    {% if friend_list[0] !='None' %}
+        {% for friend in friend_list %}
+        <a href="'/api/friend_home?username={{ friend }}">{{ friend }}</a>,&nbsp
+        {% endfor %}
+    {% else %}
+        None
+    {% endif %}
+</div>
+<div>
+   <p>Find new friend:</p>
+    <form action ='/api/find_friend' method='POST'>
+        <input type='text' name='friendname' id='friendname' placeholder= 'friend username'>
+        <input type='submit' value='Find'>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ friendname }}'s page</title>
+</head>
+<body>
+<div>
+    <h1 align="center">{{friendname}}'s page</h1>
+</div>
+
+<div>
+    {% if images[0][0] =='0' %}
+      <img src="../../../../upload_files/project/thumbnail/img_not_available.png" height="200" width="200"/>
+     <p>Your friend has not uploaded images yet.</p>
+    {% else %}
+     <p>View Collection:</p>
+    {% for image in images %}
+     <img src="../../../../upload_files/project/images/{{ image[1] }}" alt="{{ image[1] }}" height="200" width="200"/>
+         #{{ image[2] }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {% endfor %}
+    {% endif %}
+</div>
+<div>
+   <p><a href="/api/homepage">Back to my homepage</a></p>
+</div>
+
+</body>
+</html>
+</html>
